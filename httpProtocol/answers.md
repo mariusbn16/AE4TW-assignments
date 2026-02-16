@@ -53,4 +53,16 @@ S. A HEAD request is useful whenever you need information about a resource witho
 
 T. Monitoring systems might prefer this approach for efficency reasons
 
-## Task 8
+U. 
+
+| Code    | Category | Meaning |
+| -------- | ------- | ------- |
+| 200  | Success    | OK. The action requested by the client was received, understood, and accepted |
+| 201 | Success     | Created. The request has been fulfilled, resulting in the creation of a new resource |
+| 400 | Client error     | Bad request. The server cannot or will not process the request due to an apparent client error     |
+| 401 | Client error     | Unauthorized. When authentication is required and has failed or has not yet been provided     |
+| 403 | Client error     | Forbidden. The request was valid, but the server refuses action. This may be due to the user not having permission to a resource or needing an account of some sort, or attempting a prohibited action    |
+| 404 | Client error     | Not found. The requested resource could not be found but may be available in the future     |
+| 500 | Servor error     | Internal Server Error. A generic error message, given when an unexpected condition was encountered and no more specific message is suitable     |
+
+V. It violates the HTTP protocol contract by misleading automated tools and libraries into treating failures as successes. This hides actual errors from monitoring dashboards and can cause CDNs to cache error messages as valid content. Ultimately, it forces developers to write redundant code to manually parse response bodies for errors that the status code should have communicated instantly.
