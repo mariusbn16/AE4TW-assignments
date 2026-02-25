@@ -34,3 +34,19 @@ section {
     max-width: 400px; 
     width: 90%; 
 }
+
+.accordion [hidden] { 
+    display: none; 
+}
+
+.accordion button { 
+    display: block; width: 100%; text-align: left; 
+}
+
+.tabs [role="tabpanel"][hidden] { 
+    display: none; 
+}
+
+.tabs [role="tab"] { 
+    cursor: pointer; 
+}

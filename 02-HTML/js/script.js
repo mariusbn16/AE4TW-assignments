@@ -36,5 +36,53 @@ modal.addEventListener("keydown", (e) => {
     }
   } else if(e.key === "Escape") {
     closeModalButton.click();
+  } 
+});
+
+document.querySelectorAll(".accordion button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    const content = document.getElementById(btn.getAttribute("aria-controls"));
+    if (content) content.hidden = expanded; // toggle hidden
+  });
+});
+
+const tabs = document.querySelectorAll('.tabs [role="tab"]');
+const panels = document.querySelectorAll('.tabs [role="tabpanel"]');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.setAttribute('aria-selected','false'));
+    panels.forEach(p => p.hidden = true);
+    tab.setAttribute('aria-selected','true');
+    const panel = document.getElementById(tab.getAttribute('aria-controls'));
+    if(panel) panel.hidden = false;
+    tab.focus();
+  });
+});
+
+const menuBtn = document.getElementById("menuButton");
+const menu = document.getElementById("menu");
+
+menuBtn.addEventListener("click", () => {
+  const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+  menuBtn.setAttribute("aria-expanded", !expanded);
+  menu.hidden = expanded;
+});
+
+document.addEventListener("click", (e) => {
+  if (!menu.contains(e.target) && e.target !== menuBtn) {
+    menu.hidden = true;
+    menuBtn.setAttribute("aria-expanded", "false");
   }
 });
+
+// task : close the menu using the escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !menu.hidden) {
+    menu.hidden = true;
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.focus();
+  }
+})
